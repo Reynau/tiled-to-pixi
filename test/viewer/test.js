@@ -54726,6 +54726,8 @@ class TileSet {
 module.exports = TileSet
 },{}],239:[function(require,module,exports){
 const path = require('path')
+const tmx = require('tmx-parser')
+
 const TileSet = require('./TileSet')
 const TileLayer = require('./TileLayer')
 const CollisionLayer = require('./CollisionLayer')
@@ -54793,44 +54795,36 @@ class TiledMap extends PIXI.Container {
   addLayer (layer) {
     this.addChild(layer)
   }
+
+  static middleware (resource, next) {
+    if (!(resource.extension === 'tmx')) return next()
+
+    let route = path.dirname(resource.url.replace(this.baseUrl, ''))
+    tmx.parse(resource.xhr.responseText, route, function (err, map) {
+      if (err) throw err
+      resource.data = map
+      next()
+    })
+  }
 }
 
 module.exports = TiledMap
-},{"./CollisionLayer":235,"./TileLayer":237,"./TileSet":238,"path":33}],240:[function(require,module,exports){
+},{"./CollisionLayer":235,"./TileLayer":237,"./TileSet":238,"path":33,"tmx-parser":229}],240:[function(require,module,exports){
 const PIXI = require('pixi.js')
-const path = require('path')
-const tmx = require('tmx-parser')
-PIXI.extras.TiledMap = require('./../src/TiledMap')
+const TiledMap = require('./../src/TiledMap')
 
-// PIXI constants
 const app = new PIXI.Application()
-const loader = PIXI.loader
-
-let map = {}
-
 document.body.appendChild(app.view)
 
-app.stop()
-loader
+PIXI.loader
   .add('TestMap', 'maps/testmap.tmx')
   .add('assets/overworld.png')
 
-  .use(middleware)
+  .use(TiledMap.middleware)
 
   .load(function (loader, resources) {
-    map = new PIXI.extras.TiledMap('TestMap')
+    let map = new TiledMap('TestMap')
     app.stage.addChild(map)
     app.start()
   })
-
-function middleware (resource, next) {
-  if (!(resource.extension === 'tmx')) return next()
-
-  let route = path.dirname(resource.url.replace(this.baseUrl, ''))
-  tmx.parse(resource.xhr.responseText, route, function (err, map) {
-    if (err) throw err
-    resource.data = map
-    next()
-  })
-}
-},{"./../src/TiledMap":239,"path":33,"pixi.js":166,"tmx-parser":229}]},{},[240]);
+},{"./../src/TiledMap":239,"pixi.js":166}]},{},[240]);
