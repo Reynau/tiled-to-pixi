@@ -1,0 +1,26 @@
+{
+  "name": "tiled-to-pixi",
+  "version": "1.0.0",
+  "description": "Transforms a Tiled tmx map to a Pixi container with all the sprites loaded",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Reynau/tiled-to-pixi.git"
+  },
+  "author": "Xavier Lopez Reynau",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Reynau/tiled-to-pixi/issues"
+  },
+  "homepage": "https://github.com/Reynau/tiled-to-pixi#readme",
+  "dependencies": {
+    "path": "^0.12.7",
+    "pixi.js": "^4.5.1"
+  }
+}
