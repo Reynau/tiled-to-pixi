@@ -1,6 +1,5 @@
 class TileSet {
   constructor(route, tileSet) {
-    console.log('TileSet constructor - var route = ' + route)
     this.setTileSetProperties(tileSet)
     this.baseTexture = PIXI.Texture.fromImage(route + '/' + tileSet.image.source, false, PIXI.SCALE_MODES.NEAREST)
     this.setTileTextures()

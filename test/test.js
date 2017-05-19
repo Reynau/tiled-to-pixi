@@ -54733,19 +54733,20 @@ const TileLayer = require('./TileLayer')
 const CollisionLayer = require('./CollisionLayer')
 
 class TiledMap extends PIXI.Container {
-  constructor (resourceUrl) {
+  constructor (resourceId) {
     super()
 
-    let route = path.dirname(resourceUrl)
-    let data = PIXI.loader.resources[resourceUrl].data
+    let resource = PIXI.loader.resources[resourceId]
+    let route = path.dirname(resource.url)
+    console.log(PIXI.loader.resources[resourceId])
 
-    this.setDataProperties(data)
+    this.setDataProperties(resource.data)
 
-    this.background = this.createNewBackground()
-    this.addLayer(this.background)
+    this.backgroundLayer = this.createBackgroundLayer()
+    this.addLayer(this.backgroundLayer)
 
-    this.setDataTileSets(data, route)
-    this.setDataLayer(data)
+    this.setDataTileSets(resource.data, route)
+    this.setDataLayers(resource.data)
   }
 
   setDataProperties (data) {
@@ -54756,7 +54757,7 @@ class TiledMap extends PIXI.Container {
     }
   }
 
-  createNewBackground () {
+  createBackgroundLayer () {
     let background = new PIXI.Graphics()
     background.beginFill(0x000000, 0)
     background.drawRect(0, 0, this.width * this.tileWidth, this.height * this.tileHeight)
@@ -54766,12 +54767,12 @@ class TiledMap extends PIXI.Container {
 
   setDataTileSets (data, route) {
     this.tileSets = []
-    data.tileSets.forEach(function (tilesetData) {
-      this.tileSets.push(new TileSet(route, tilesetData))
+    data.tileSets.forEach(function (tileSetData) {
+      this.tileSets.push(new TileSet(route, tileSetData))
     }, this)
   }
 
-  setDataLayer (data) {
+  setDataLayers (data) {
     data.layers.forEach(function (layerData) {
       switch (layerData.type) {
         case 'tile':
