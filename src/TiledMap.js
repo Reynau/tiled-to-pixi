@@ -6,7 +6,7 @@ const CollisionLayer = require('./CollisionLayer')
 
 class TiledMap extends PIXI.Container {
   constructor (resourceUrl) {
-    super(this)
+    super()
 
     let route = path.dirname(resourceUrl)
     let data = PIXI.loader.resources[resourceUrl].data
@@ -52,7 +52,8 @@ class TiledMap extends PIXI.Container {
               this.layers['CollisionLayer'] = new CollisionLayer(layerData)
               break
             default:
-              this.layers[layerData.name] = new TileLayer(layerData, this.tileSets)
+              let tileLayer = new TileLayer(layerData, this.tileSets)
+              this.layers[layerData.name] = tileLayer
               this.addLayer(tileLayer)
               break
           }

@@ -2,6 +2,8 @@ const Tile = require('./Tile')
 
 class TileLayer extends PIXI.Container {
   constructor (layer, tileSets) {
+    super()
+
     this.setLayerProperties(layer)
     this.alpha = parseFloat(layer.opacity)
     this.setLayerTiles(layer, tileSets)

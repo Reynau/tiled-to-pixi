@@ -1,9 +1,23 @@
+function setTextures (tile, tileSet) {
+  let textures = []
+  if (tile.animations.length) {
+    tile.animations.forEach(function (frame) {
+      textures.push(tileSet.textures[frame.tileId])
+    }, this)
+  } else {
+    textures.push(tileSet.textures[tile.gid - tileSet.firstGid])
+  }
+  return textures
+}
+
 class Tile extends PIXI.extras.AnimatedSprite {
   constructor (tile, tileSet, horizontalFlip, verticalFlip, diagonalFlip) {
-    super(this, textures)
-    this.setTileProperties(tile)
-    this.setTextures(tile, tileSet)
+    let textures = setTextures(tile, tileSet)
+    super(textures)
+
+    this.textures = textures
     this.tileSet = tileSet
+    this.setTileProperties(tile)
     this.setFlips(horizontalFlip, verticalFlip, diagonalFlip)
   }
 
@@ -12,17 +26,6 @@ class Tile extends PIXI.extras.AnimatedSprite {
       if (tile.hasOwnProperty(property)) {
         this[property] = tile[property]
       }
-    }
-  }
-
-  setTextures (tile, tileSet) {
-    this.textures = []
-    if (tile.animations.length) {
-      tile.animations.forEach(function (frame) {
-        this.textures.push(tileSet.textures[frame.tileId])
-      }, this)
-    } else {
-      this.textures.push(tileSet.textures[tile.gid - tileSet.firstGid])
     }
   }
 
@@ -57,3 +60,5 @@ class Tile extends PIXI.extras.AnimatedSprite {
     }
   }
 }
+
+module.exports = Tile

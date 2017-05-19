@@ -4,7 +4,7 @@
   <property name="name" value="TestMap"/>
  </properties>
  <tileset firstgid="1" name="World" tilewidth="16" tileheight="16" tilecount="1440" columns="40">
-  <image source="../assets/gfx/Overworld.png" trans="000000" width="640" height="576"/>
+  <image source="Overworld.png" trans="000000" width="640" height="576"/>
   <tile id="16">
    <animation>
     <frame tileid="16" duration="100"/>
