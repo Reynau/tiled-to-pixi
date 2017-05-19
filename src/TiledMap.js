@@ -1,4 +1,6 @@
 const path = require('path')
+const tmx = require('tmx-parser')
+
 const TileSet = require('./TileSet')
 const TileLayer = require('./TileLayer')
 const CollisionLayer = require('./CollisionLayer')
@@ -65,6 +67,17 @@ class TiledMap extends PIXI.Container {
 
   addLayer (layer) {
     this.addChild(layer)
+  }
+
+  static middleware (resource, next) {
+    if (!(resource.extension === 'tmx')) return next()
+
+    let route = path.dirname(resource.url.replace(this.baseUrl, ''))
+    tmx.parse(resource.xhr.responseText, route, function (err, map) {
+      if (err) throw err
+      resource.data = map
+      next()
+    })
   }
 }
 
