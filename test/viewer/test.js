@@ -54700,7 +54700,6 @@ module.exports = TileLayer
 },{"./Tile":236}],238:[function(require,module,exports){
 class TileSet {
   constructor(route, tileSet) {
-    console.log('TileSet constructor - var route = ' + route)
     this.setTileSetProperties(tileSet)
     this.baseTexture = PIXI.Texture.fromImage(route + '/' + tileSet.image.source, false, PIXI.SCALE_MODES.NEAREST)
     this.setTileTextures()
@@ -54726,7 +54725,6 @@ class TileSet {
 
 module.exports = TileSet
 },{}],239:[function(require,module,exports){
-// const Container = PIXI.Container
 const path = require('path')
 const TileSet = require('./TileSet')
 const TileLayer = require('./TileLayer')
@@ -54738,7 +54736,6 @@ class TiledMap extends PIXI.Container {
 
     let resource = PIXI.loader.resources[resourceId]
     let route = path.dirname(resource.url)
-    console.log(PIXI.loader.resources[resourceId])
 
     this.setDataProperties(resource.data)
 
@@ -54815,8 +54812,8 @@ document.body.appendChild(app.view)
 
 app.stop()
 loader
-  .add('TestMap', 'testmap.tmx')
-  .add('Overworld.png')
+  .add('TestMap', 'maps/testmap.tmx')
+  .add('assets/overworld.png')
 
   .use(middleware)
 

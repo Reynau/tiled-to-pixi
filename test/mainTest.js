@@ -13,8 +13,8 @@ document.body.appendChild(app.view)
 
 app.stop()
 loader
-  .add('TestMap', 'testmap.tmx')
-  .add('Overworld.png')
+  .add('TestMap', 'maps/testmap.tmx')
+  .add('assets/overworld.png')
 
   .use(middleware)
 
