@@ -1,5 +1,5 @@
 # Tiled to Pixi
-Transforms a Tiled tmx map to a Pixi container ready to usewewerw
+Transforms a Tiled tmx map to a Pixi container ready to use.
 
 ## How to use
 Load your .tmx file and the necessary assets to render the map using PIXI.Loader, and let the module do the rest!
