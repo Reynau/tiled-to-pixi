@@ -7,7 +7,7 @@ Load your .tmx file and the necessary assets to render the map using PIXI.Loader
 Example code:
 ```javascript
 const PIXI = require('pixi.js')
-const TiledMap = require('./../src/TiledMap')
+const TiledMap = require('TiledMap')
 
 const app = new PIXI.Application()
 document.body.appendChild(app.view)
