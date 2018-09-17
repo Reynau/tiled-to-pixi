@@ -7,19 +7,19 @@ Load your .tmx file and the necessary assets to render the map using PIXI.Loader
 Example code:
 ```javascript
 const PIXI = require('pixi.js')
-const TiledMap = require('TiledMap')
+const TiledMap = require('tiled-to-pixi')
 
 const app = new PIXI.Application()
 document.body.appendChild(app.view)
 
 PIXI.loader
-  .add('TestMap', 'maps/testmap.tmx')
+  .add('YourMapId', 'maps/testmap.tmx')
   .add('assets/overworld.png')
 
   .use(TiledMap.middleware)
 
   .load(function (loader, resources) {
-    let map = new TiledMap('TestMap')
+    let map = new TiledMap('YourMapId')
     app.stage.addChild(map)
     app.start()
   })
