@@ -25,5 +25,7 @@ PIXI.loader
   })
 ```
 
+You can also find a simple example in the example folder, or a more complete example at https://github.com/Reynau/the-game
+
 ## License
 MIT © [Xavier Lopez Reynau](http://lopezreynau.me/)
