@@ -57977,7 +57977,6 @@ module.exports = class CollisionLayer {
     let phu = 8
     let phd = 2
 
-    // Magic number 8: The half of 16, that is the size of the tile
     return !(!actual || resx < pwl && !left || resx > pwr && !right || resy > phu && !down || resy < phd && !up ||
     resy > phu && resx > pwr && !downRight || resy > phu && resx < pwl && !downLeft ||
     resy < phd && resx > pwr && !upRight || resy < phd && resx < pwl && !upLeft)
