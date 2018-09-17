@@ -7,7 +7,7 @@
     "test": "test"
   },
   "scripts": {
-    "test": "browserify test/mainTest.js -o test/viewer/test.js"
+    "build_example": "browserify example/example.js -o example/viewer/bundle.js"
   },
   "repository": {
     "type": "git",
