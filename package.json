@@ -1,6 +1,6 @@
 {
   "name": "tiled-to-pixi",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Transforms a Tiled tmx map to a Pixi container with all the sprites loaded",
   "main": "src/TiledMap.js",
   "directories": {
