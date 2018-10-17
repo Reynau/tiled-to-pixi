@@ -6,14 +6,21 @@ const app = new PIXI.Application()
 document.body.appendChild(app.view)
 
 PIXI.loader
-  .add('TestMap', 'maps/testmap.tmx')
-  .add('assets/overworld.png')
+  .add('assets/overworld.png') // Tileset to render both maps
+
+  .add('TestMap1', 'maps/testmap1.tmx')
+  .add('TestMap2', 'maps/testmap2.tmx')
 
   .use(TiledMap.middleware)
 
   .load(function (loader, resources) {
-    let map = new TiledMap('TestMap')
-    app.stage.addChild(map)
+  	// Generate the containers for both maps
+    let map1 = new TiledMap('TestMap1')
+    let map2 = new TiledMap('TestMap2')
+
+    app.stage.addChild(map1)
+    app.stage.addChild(map2)
+    
     app.start()
   })
 },{"./../src/TiledMap":247,"pixi.js":170}],2:[function(require,module,exports){
@@ -58154,7 +58161,8 @@ class TiledMap extends PIXI.Container {
 
     this.setDataProperties(resource.data)
 
-    this.createBackgroundLayer()
+    this.backgroundLayer = this.createBackgroundLayer()
+    this.addLayer(this.backgroundLayer)
 
     this.setDataTileSets(resource.data, route)
     this.setDataLayers(resource.data)
@@ -58173,7 +58181,7 @@ class TiledMap extends PIXI.Container {
     background.beginFill(0x000000, 0)
     background.drawRect(0, 0, this.width * this.tileWidth, this.height * this.tileHeight)
     background.endFill()
-    this.addLayer(background)
+    return background
   }
 
   setDataTileSets (data, route) {
