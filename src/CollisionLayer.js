@@ -32,11 +32,9 @@ module.exports = class CollisionLayer {
     let r=0, c=0,
         collidables = []
     for (let i = 0; i < this.tilesMap.length; ++i) {
-      c++;
-      if(i%50==1){
-        r++;
-        c=0;
-      }
+      c = i%this.width;
+      if(i%this.width==0&&i!==0)
+        r++;      
       let tile = this.tilesMap[i]
 
       if(tile !== undefined)
