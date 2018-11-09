@@ -1,7 +1,8 @@
 module.exports = class CollisionLayer {
 
   constructor(layer) {
-    this.constructCollisionsMap(layer.tiles)
+    this.tilesMap = layer.tiles
+    this.constructCollisionsMap()
 
     this.width = layer.map.width
     this.height = layer.map.height
@@ -17,13 +18,28 @@ module.exports = class CollisionLayer {
     return this.collisionsMap[posx + posy * this.width]
   }
 
-  constructCollisionsMap(tilesMap) {
-    this.collisionsMap = new Array(tilesMap.length)
+  constructCollisionsMap() {
+    this.collisionsMap = new Array(this.tilesMap.length)
 
-    for (let i = 0; i < tilesMap.length; ++i) {
-      let tile = tilesMap[i]
+    for (let i = 0; i < this.tilesMap.length; ++i) {
+      let tile = this.tilesMap[i]
 
       this.collisionsMap[i] = (tile === undefined)
     }
+  }
+
+  getCollidables(){
+    let r=0, c=0,
+        collidables = []
+    for (let i = 0; i < this.tilesMap.length; ++i) {
+      c = i%this.width;
+      if(i%this.width==0&&i!==0)
+        r++;      
+      let tile = this.tilesMap[i]
+
+      if(tile !== undefined)
+        collidables.push({x: c*this.tileWidth, y: r*this.tileHeight, width: this.tileWidth, height: this.tileHeight})  
+    }
+    return collidables
   }
 }
