@@ -55,8 +55,12 @@ PIXI.loader
 if (map.layers.CollisionLayer.isWalkable(x, y)) {
   [...]
 }
+[...]
+let collidables = map.layers.CollisionLayer.getCollidables()
+[...]
 ```
-IsWalkable method returns false if the sprite containing (x,y) coords has been marked as collisionable, returns true otherwise.
+`IsWalkable` returns false if the sprite containing (x,y) coords has been marked as collisionable, returns true otherwise.  
+`GetCollidables` returns an array of all the collidable rectangles with their position relative to the map. 
 
 
 You can also find a simple example in the example folder, or a more complete example at https://github.com/Reynau/the-game
