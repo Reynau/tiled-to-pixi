@@ -1,15 +1,17 @@
-const path = require('path')
-const tmx = require('tmx-parser')
+import * as PIXI from 'pixi.js'
 
-const TileSet = require('./TileSet')
-const TileLayer = require('./TileLayer')
-const CollisionLayer = require('./CollisionLayer')
+import path from 'path'
+import tmx from 'tmx-parser'
+
+import TileSet from './TileSet'
+import TileLayer from './TileLayer'
+import CollisionLayer from './CollisionLayer'
 
 class TiledMap extends PIXI.Container {
   constructor (resourceId) {
     super()
 
-    let resource = PIXI.loader.resources[resourceId]
+    let resource = PIXI.Loader.shared.resources[resourceId]
     let route = path.dirname(resource.url)
 
     this.setDataProperties(resource.data)

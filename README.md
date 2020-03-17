@@ -5,13 +5,13 @@ Transforms a Tiled tmx map to a Pixi container ready to use.
 Load your .tmx file and the necessary assets to render the maps using PIXI.Loader, and let the module do the rest!
 
 ```javascript
-const PIXI = require('pixi.js')
-const TiledMap = require('tiled-to-pixi')
+import * as PIXI from 'pixi.js'
+import TiledMap from 'tiled-to-pixi'
 
 const app = new PIXI.Application()
 document.body.appendChild(app.view)
 
-PIXI.loader
+PIXI.Loader.shared
   .add('assets/overworld.png') // Tileset to render both maps
 
   .add('TestMap1', 'maps/testmap1.tmx')
@@ -44,7 +44,7 @@ Then, to check collisions just call isWalkable function from CollisionLayer:
 ```javascript
 [...]
 let map = {}
-PIXI.loader
+PIXI.Loader.shared
   [...]
   .load(function (loader, resources) {
     map = new TiledMap('YourMapId')

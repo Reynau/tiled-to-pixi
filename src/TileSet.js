@@ -1,7 +1,9 @@
+import * as PIXI from 'pixi.js'
+
 class TileSet {
   constructor(route, tileSet) {
     this.setTileSetProperties(tileSet)
-    this.baseTexture = PIXI.Texture.fromImage(route + '/' + tileSet.image.source, false, PIXI.SCALE_MODES.NEAREST)
+    this.baseTexture = PIXI.Texture.from(route + '/' + tileSet.image.source)
     this.setTileTextures()
   }
 

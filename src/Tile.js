@@ -1,3 +1,5 @@
+import * as PIXI from 'pixi.js'
+
 function setTextures (tile, tileSet) {
   let textures = []
   if (tile.animations.length) {
@@ -10,7 +12,7 @@ function setTextures (tile, tileSet) {
   return textures
 }
 
-class Tile extends PIXI.extras.AnimatedSprite {
+class Tile extends PIXI.AnimatedSprite {
   constructor (tile, tileSet, horizontalFlip, verticalFlip, diagonalFlip) {
     let textures = setTextures(tile, tileSet)
     super(textures)

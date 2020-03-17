@@ -7,7 +7,7 @@
     "test": "test"
   },
   "scripts": {
-    "build_example": "browserify example/example.js -o example/viewer/bundle.js"
+    "build_example": "browserify example/example.js -o example/viewer/bundle.js -t [ babelify --presets [ @babel/preset-env ] ]"
   },
   "repository": {
     "type": "git",
@@ -21,10 +21,13 @@
   "homepage": "https://github.com/Reynau/tiled-to-pixi#readme",
   "dependencies": {
     "path": "^0.12.7",
-    "pixi.js": "^4.5.1",
+    "pixi.js": "^5.2.1",
     "tmx-parser": "^1.5.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.8.7",
+    "@babel/preset-env": "^7.8.7",
+    "babelify": "^10.0.0",
     "browserify": "^14.3.0"
   }
 }

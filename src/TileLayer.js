@@ -1,4 +1,5 @@
-const Tile = require('./Tile')
+import * as PIXI from 'pixi.js'
+import Tile from './Tile'
 
 class TileLayer extends PIXI.Container {
   constructor (layer, tileSets) {
