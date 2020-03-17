@@ -1,10 +1,10 @@
-const PIXI = require('pixi.js')
-const TiledMap = require('./../src/TiledMap')
+import * as PIXI from 'pixi.js'
+import TiledMap from './../src/TiledMap'
 
 const app = new PIXI.Application()
 document.body.appendChild(app.view)
 
-PIXI.loader
+PIXI.Loader.shared
   .add('assets/overworld.png') // Tileset to render both maps
 
   .add('TestMap1', 'maps/testmap1.tmx')
