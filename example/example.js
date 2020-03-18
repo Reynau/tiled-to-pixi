@@ -17,6 +17,8 @@ PIXI.Loader.shared
     let map1 = new TiledMap('TestMap1')
     let map2 = new TiledMap('TestMap2')
 
+    console.log(map1.layers.CollisionLayer.getCollidables())
+
     app.stage.addChild(map1)
     //app.stage.addChild(map2)
     

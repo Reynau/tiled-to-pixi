@@ -1,4 +1,4 @@
-module.exports = class CollisionLayer {
+class CollisionLayer {
 
   constructor(layer) {
     this.tilesMap = layer.tiles
@@ -28,18 +28,27 @@ module.exports = class CollisionLayer {
     }
   }
 
-  getCollidables(){
-    let r=0, c=0,
-        collidables = []
-    for (let i = 0; i < this.tilesMap.length; ++i) {
-      c = i%this.width;
-      if(i%this.width==0&&i!==0)
-        r++;      
-      let tile = this.tilesMap[i]
+  getCollidables() {
+    const collidables = []
 
-      if(tile !== undefined)
-        collidables.push({x: c*this.tileWidth, y: r*this.tileHeight, width: this.tileWidth, height: this.tileHeight})  
+    let row = 0, column = 0
+    for (let i = 0; i < this.tilesMap.length; ++i) {
+      column = i % this.width
+      row = Math.floor(i / this.width)
+
+      let tile = this.tilesMap[i]
+      if (tile === undefined) continue
+
+      const newCollidable = {
+        x: column * this.tileWidth,
+        y: row * this.tileHeight,
+        width: this.tileWidth,
+        height: this.tileHeight
+      }
+      collidables.push(newCollidable)  
     }
     return collidables
   }
 }
+
+module.exports = CollisionLayer

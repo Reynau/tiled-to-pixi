@@ -20,6 +20,7 @@ PIXI.Loader.shared.add('assets/overworld.png') // Tileset to render both maps
   // Generate the containers for both maps
   var map1 = new _TiledMap["default"]('TestMap1');
   var map2 = new _TiledMap["default"]('TestMap2');
+  console.log(map1.layers.CollisionLayer.getCollidables());
   app.stage.addChild(map1); //app.stage.addChild(map2)
 
   app.start();
@@ -61941,7 +61942,7 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-module.exports = /*#__PURE__*/function () {
+var CollisionLayer = /*#__PURE__*/function () {
   function CollisionLayer(layer) {
     _classCallCheck(this, CollisionLayer);
 
@@ -61973,20 +61974,22 @@ module.exports = /*#__PURE__*/function () {
   }, {
     key: "getCollidables",
     value: function getCollidables() {
-      var r = 0,
-          c = 0,
-          collidables = [];
+      var collidables = [];
+      var row = 0,
+          column = 0;
 
       for (var i = 0; i < this.tilesMap.length; ++i) {
-        c = i % this.width;
-        if (i % this.width == 0 && i !== 0) r++;
+        column = i % this.width;
+        row = Math.floor(i / this.width);
         var tile = this.tilesMap[i];
-        if (tile !== undefined) collidables.push({
-          x: c * this.tileWidth,
-          y: r * this.tileHeight,
+        if (tile === undefined) continue;
+        var newCollidable = {
+          x: column * this.tileWidth,
+          y: row * this.tileHeight,
           width: this.tileWidth,
           height: this.tileHeight
-        });
+        };
+        collidables.push(newCollidable);
       }
 
       return collidables;
@@ -61995,6 +61998,8 @@ module.exports = /*#__PURE__*/function () {
 
   return CollisionLayer;
 }();
+
+module.exports = CollisionLayer;
 
 },{}],107:[function(require,module,exports){
 "use strict";
@@ -62264,7 +62269,8 @@ var TileSet = /*#__PURE__*/function () {
 
       for (var y = this.margin; y < this.image.height; y += this.tileHeight + this.spacing) {
         for (var x = this.margin; x < this.image.width; x += this.tileWidth + this.spacing) {
-          this.textures.push(new PIXI.Texture(this.baseTexture, new PIXI.Rectangle(x, y, this.tileWidth, this.tileHeight)));
+          var tileRectangle = new PIXI.Rectangle(x, y, this.tileWidth, this.tileHeight);
+          this.textures.push(new PIXI.Texture(this.baseTexture, tileRectangle));
         }
       }
     }
