@@ -62177,29 +62177,43 @@ var TileLayer = /*#__PURE__*/function (_PIXI$Container) {
         for (var x = 0; x < layer.map.width; x++) {
           var i = x + y * layer.map.width;
 
-          if (layer.tiles[i] && layer.tiles[i].gid && layer.tiles[i].gid !== 0) {
-            var tileSet = findTileSet(layer.tiles[i].gid, tileSets);
-            var tile = new _Tile["default"](layer.tiles[i], tileSet, layer.horizontalFlips[i], layer.verticalFlips[i], layer.diagonalFlips[i]);
-            tile.x = x * layer.map.tileWidth;
-            tile.y = y * layer.map.tileHeight + (layer.map.tileHeight - tile.textures[0].height);
-            tile._x = x;
-            tile._y = y;
-
-            if (tileSet.tileOffset) {
-              tile.x += tileSet.tileOffset.x;
-              tile.y += tileSet.tileOffset.y;
-            }
-
-            if (tile.textures.length > 1) {
-              tile.animationSpeed = 1000 / 60 / tile.animations[0].duration;
-              tile.gotoAndPlay(0);
-            }
-
+          if (this.tileExists(layer, i)) {
+            var tileData = {
+              i: i,
+              x: x,
+              y: y
+            };
+            var tile = this.createTile(layer, tileSets, tileData);
             this.tiles.push(tile);
             this.addTile(tile);
           }
         }
       }
+    }
+  }, {
+    key: "createTile",
+    value: function createTile(layer, tileSets, tileData) {
+      var i = tileData.i,
+          x = tileData.x,
+          y = tileData.y;
+      var tileSet = findTileSet(layer.tiles[i].gid, tileSets);
+      var tile = new _Tile["default"](layer.tiles[i], tileSet, layer.horizontalFlips[i], layer.verticalFlips[i], layer.diagonalFlips[i]);
+      tile.x = x * layer.map.tileWidth;
+      tile.y = y * layer.map.tileHeight + (layer.map.tileHeight - tile.textures[0].height);
+      tile._x = x + tileSet.tileOffset ? tileSet.tileOffset.x : 0;
+      tile._y = y + tileSet.tileOffset ? tileSet.tileOffset.y : 0;
+
+      if (tile.textures.length > 1) {
+        tile.animationSpeed = 1000 / 60 / tile.animations[0].duration;
+        tile.gotoAndPlay(0);
+      }
+
+      return tile;
+    }
+  }, {
+    key: "tileExists",
+    value: function tileExists(layer, i) {
+      return layer.tiles[i] && layer.tiles[i].gid && layer.tiles[i].gid !== 0;
     }
   }, {
     key: "addTile",
