@@ -62033,8 +62033,8 @@ function setTextures(tile, tileSet) {
 
   if (tile.animations.length) {
     tile.animations.forEach(function (frame) {
-      textures.push(tileSet.textures[frame.tileId]);
-    }, this);
+      return textures.push(tileSet.textures[frame.tileId]);
+    });
   } else {
     textures.push(tileSet.textures[tile.gid - tileSet.firstGid]);
   }
@@ -62074,33 +62074,43 @@ var Tile = /*#__PURE__*/function (_PIXI$AnimatedSprite) {
   }, {
     key: "setFlips",
     value: function setFlips(horizontalFlip, verticalFlip, diagonalFlip) {
-      if (horizontalFlip) {
-        this.anchor.x = 1;
-        this.scale.x = -1;
-      }
-
-      if (verticalFlip) {
-        this.anchor.y = 1;
-        this.scale.y = -1;
-      }
+      if (horizontalFlip) this.setHorizontalFlip();
+      if (verticalFlip) this.setVerticalFlip();
 
       if (diagonalFlip) {
-        if (horizontalFlip) {
-          this.anchor.x = 0;
-          this.scale.x = 1;
-          this.anchor.y = 1;
-          this.scale.y = 1;
-          this.rotation = PIXI.DEG_TO_RAD * 90;
-        }
-
-        if (verticalFlip) {
-          this.anchor.x = 1;
-          this.scale.x = 1;
-          this.anchor.y = 0;
-          this.scale.y = 1;
-          this.rotation = PIXI.DEG_TO_RAD * -90;
-        }
+        if (horizontalFlip) this.setHorizontalDiagonalFlip();
+        if (verticalFlip) this.setVerticalDiagonalFlip();
       }
+    }
+  }, {
+    key: "setHorizontalFlip",
+    value: function setHorizontalFlip() {
+      this.anchor.x = 1;
+      this.scale.x = -1;
+    }
+  }, {
+    key: "setVerticalFlip",
+    value: function setVerticalFlip() {
+      this.anchor.y = 1;
+      this.scale.y = -1;
+    }
+  }, {
+    key: "setHorizontalDiagonalFlip",
+    value: function setHorizontalDiagonalFlip() {
+      this.anchor.x = 0;
+      this.scale.x = 1;
+      this.anchor.y = 1;
+      this.scale.y = 1;
+      this.rotation = PIXI.DEG_TO_RAD * 90;
+    }
+  }, {
+    key: "setVerticalDiagonalFlip",
+    value: function setVerticalDiagonalFlip() {
+      this.anchor.x = 1;
+      this.scale.x = 1;
+      this.anchor.y = 0;
+      this.scale.y = 1;
+      this.rotation = PIXI.DEG_TO_RAD * -90;
     }
   }]);
 
