@@ -1,6 +1,5 @@
 class CollisionLayer {
-
-  constructor(layer) {
+  constructor (layer) {
     this.tilesMap = layer.tiles
     this.constructCollisionsMap()
 
@@ -11,32 +10,32 @@ class CollisionLayer {
     this.tileHeight = layer.map.tileHeight
   }
 
-  isWalkable(x, y) {
-    let posx = Math.floor(x / this.tileWidth)
-    let posy = Math.floor(y / this.tileHeight)
+  isWalkable (x, y) {
+    const posx = Math.floor(x / this.tileWidth)
+    const posy = Math.floor(y / this.tileHeight)
 
     return this.collisionsMap[posx + posy * this.width]
   }
 
-  constructCollisionsMap() {
+  constructCollisionsMap () {
     this.collisionsMap = new Array(this.tilesMap.length)
 
     for (let i = 0; i < this.tilesMap.length; ++i) {
-      let tile = this.tilesMap[i]
+      const tile = this.tilesMap[i]
 
       this.collisionsMap[i] = (tile === undefined)
     }
   }
 
-  getCollidables() {
+  getCollidables () {
     const collidables = []
 
-    let row = 0, column = 0
+    let row = 0; let column = 0
     for (let i = 0; i < this.tilesMap.length; ++i) {
       column = i % this.width
       row = Math.floor(i / this.width)
 
-      let tile = this.tilesMap[i]
+      const tile = this.tilesMap[i]
       if (tile === undefined) continue
 
       const newCollidable = {
@@ -45,7 +44,7 @@ class CollisionLayer {
         width: this.tileWidth,
         height: this.tileHeight
       }
-      collidables.push(newCollidable)  
+      collidables.push(newCollidable)
     }
     return collidables
   }

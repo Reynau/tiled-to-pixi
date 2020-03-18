@@ -1,7 +1,7 @@
 import * as PIXI from 'pixi.js'
 
 function setTextures (tile, tileSet) {
-  let textures = []
+  const textures = []
   if (tile.animations.length) {
     tile.animations.forEach((frame) => textures.push(tileSet.textures[frame.tileId]))
   } else {
@@ -12,7 +12,7 @@ function setTextures (tile, tileSet) {
 
 class Tile extends PIXI.AnimatedSprite {
   constructor (tile, tileSet, horizontalFlip, verticalFlip, diagonalFlip) {
-    let textures = setTextures(tile, tileSet)
+    const textures = setTextures(tile, tileSet)
     super(textures)
 
     this.textures = textures
@@ -22,8 +22,8 @@ class Tile extends PIXI.AnimatedSprite {
   }
 
   setTileProperties (tile) {
-    for (let property in tile) {
-      if (tile.hasOwnProperty(property)) {
+    for (const property in tile) {
+      if (Object.prototype.hasOwnProperty.call(tile, property)) {
         this[property] = tile[property]
       }
     }

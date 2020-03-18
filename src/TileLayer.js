@@ -11,8 +11,8 @@ class TileLayer extends PIXI.Container {
   }
 
   setLayerProperties (layer) {
-    for (let property in layer) {
-      if (layer.hasOwnProperty(property)) {
+    for (const property in layer) {
+      if (Object.prototype.hasOwnProperty.call(layer, property)) {
         this[property] = layer[property]
       }
     }
@@ -63,7 +63,7 @@ class TileLayer extends PIXI.Container {
   }
 }
 
-function findTileSet(gid, tileSets) {
+function findTileSet (gid, tileSets) {
   let tileSet
   for (let i = tileSets.length - 1; i >= 0; i--) {
     tileSet = tileSets[i]

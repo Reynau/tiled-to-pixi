@@ -8,7 +8,6 @@ import TileLayer from './TileLayer'
 import CollisionLayer from './CollisionLayer'
 
 class TiledMap extends PIXI.Container {
-
   static middleware (resource, next) {
     if (resource.extension !== 'tmx') return next()
 
@@ -26,8 +25,8 @@ class TiledMap extends PIXI.Container {
   constructor (resourceId) {
     super()
 
-    let resource = PIXI.Loader.shared.resources[resourceId]
-    let route = path.dirname(resource.url)
+    const resource = PIXI.Loader.shared.resources[resourceId]
+    const route = path.dirname(resource.url)
 
     this.setDataProperties(resource.data)
     this.setDataTileSets(resource.data, route)
@@ -35,8 +34,8 @@ class TiledMap extends PIXI.Container {
   }
 
   setDataProperties (data) {
-    for (let property in data) {
-      if (data.hasOwnProperty(property)) {
+    for (const property in data) {
+      if (Object.prototype.hasOwnProperty.call(data, property)) {
         this[property] = data[property]
       }
     }
@@ -61,12 +60,12 @@ class TiledMap extends PIXI.Container {
   }
 
   setTileLayer (layerData) {
-    if (layerData.name === "Collisions") {
-      this.layers['CollisionLayer'] = new CollisionLayer(layerData)
+    if (layerData.name === 'Collisions') {
+      this.layers.CollisionLayer = new CollisionLayer(layerData)
       return
     }
-    
-    let tileLayer = new TileLayer(layerData, this.tileSets)
+
+    const tileLayer = new TileLayer(layerData, this.tileSets)
     this.layers[layerData.name] = tileLayer
     this.addLayer(tileLayer)
   }

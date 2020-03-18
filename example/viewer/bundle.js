@@ -61975,8 +61975,8 @@ var CollisionLayer = /*#__PURE__*/function () {
     key: "getCollidables",
     value: function getCollidables() {
       var collidables = [];
-      var row = 0,
-          column = 0;
+      var row = 0;
+      var column = 0;
 
       for (var i = 0; i < this.tilesMap.length; ++i) {
         column = i % this.width;
@@ -62066,7 +62066,7 @@ var Tile = /*#__PURE__*/function (_PIXI$AnimatedSprite) {
     key: "setTileProperties",
     value: function setTileProperties(tile) {
       for (var property in tile) {
-        if (tile.hasOwnProperty(property)) {
+        if (Object.prototype.hasOwnProperty.call(tile, property)) {
           this[property] = tile[property];
         }
       }
@@ -62173,7 +62173,7 @@ var TileLayer = /*#__PURE__*/function (_PIXI$Container) {
     key: "setLayerProperties",
     value: function setLayerProperties(layer) {
       for (var property in layer) {
-        if (layer.hasOwnProperty(property)) {
+        if (Object.prototype.hasOwnProperty.call(layer, property)) {
           this[property] = layer[property];
         }
       }
@@ -62281,7 +62281,7 @@ var TileSet = /*#__PURE__*/function () {
     key: "setTileSetProperties",
     value: function setTileSetProperties(tileSet) {
       for (var property in tileSet) {
-        if (tileSet.hasOwnProperty(property)) {
+        if (Object.prototype.hasOwnProperty.call(tileSet, property)) {
           this[property] = tileSet[property];
         }
       }
@@ -62385,7 +62385,7 @@ var TiledMap = /*#__PURE__*/function (_PIXI$Container) {
     key: "setDataProperties",
     value: function setDataProperties(data) {
       for (var property in data) {
-        if (data.hasOwnProperty(property)) {
+        if (Object.prototype.hasOwnProperty.call(data, property)) {
           this[property] = data[property];
         }
       }
@@ -62418,8 +62418,8 @@ var TiledMap = /*#__PURE__*/function (_PIXI$Container) {
   }, {
     key: "setTileLayer",
     value: function setTileLayer(layerData) {
-      if (layerData.name === "Collisions") {
-        this.layers['CollisionLayer'] = new _CollisionLayer["default"](layerData);
+      if (layerData.name === 'Collisions') {
+        this.layers.CollisionLayer = new _CollisionLayer["default"](layerData);
         return;
       }
 
