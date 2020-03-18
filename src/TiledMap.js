@@ -72,11 +72,14 @@ class TiledMap extends PIXI.Container {
   }
 
   static middleware (resource, next) {
-    if (!(resource.extension === 'tmx')) return next()
+    if (resource.extension !== 'tmx') return next()
 
-    let route = path.dirname(resource.url.replace(this.baseUrl, ''))
-    tmx.parse(resource.xhr.responseText, route, function (err, map) {
-      if (err) throw err
+    const xmlString = resource.xhr.responseText
+    const pathToFile = resource.url
+
+    tmx.parse(xmlString, pathToFile, (error, map) => {
+      if (error) throw error
+      
       resource.data = map
       next()
     })

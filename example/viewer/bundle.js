@@ -62399,12 +62399,13 @@ var TiledMap = /*#__PURE__*/function (_PIXI$Container) {
   }], [{
     key: "middleware",
     value: function middleware(resource, next) {
-      if (!(resource.extension === 'tmx')) return next();
+      if (resource.extension !== 'tmx') return next();
+      var xmlString = resource.xhr.responseText;
+      var pathToFile = resource.url;
 
-      var route = _path["default"].dirname(resource.url.replace(this.baseUrl, ''));
-
-      _tmxParser["default"].parse(resource.xhr.responseText, route, function (err, map) {
-        if (err) throw err;
+      _tmxParser["default"].parse(xmlString, pathToFile, function (error, map) {
+        if (error) throw error;
+        console.log(map);
         resource.data = map;
         next();
       });
