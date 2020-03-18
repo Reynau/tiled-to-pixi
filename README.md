@@ -1,7 +1,7 @@
 [![JavaScript Style Guide](https://cdn.rawgit.com/standard/standard/master/badge.svg)](https://github.com/standard/standard)
 
 # Tiled to Pixi
-Transforms a Tiled tmx map to a Pixi container ready to use.
+Transforms a Tiled tmx map to a Pixi v5 container ready to use.
 
 ## How to use Tiled to Pixi
 Load your .tmx file and the necessary assets to render the maps using PIXI.Loader, and let the module do the rest!
